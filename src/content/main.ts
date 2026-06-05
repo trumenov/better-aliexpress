@@ -4,7 +4,7 @@ import { features } from '../lib/features/features.ts';
 import { MessageTypes } from '../lib/messages/message-types.ts';
 import { ToggleFeatureMessage } from '../lib/messages/toggle-feature-message.ts';
 
-browser.runtime.onMessage.addListener((message: any, _) => {
+browser.runtime.onMessage.addListener((message: any, _sender: any) => {
   if (message.type !== MessageTypes.ToggleFeature) return undefined;
 
   const toggleFeatureMessage = message as ToggleFeatureMessage;
