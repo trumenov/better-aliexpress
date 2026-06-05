@@ -15,6 +15,15 @@
     </header>
     <main class="main">
       <section class="config-container" id="configContainer"></section>
+      <section class="spammer-settings" id="spammerSettings" hidden>
+        <h2>Price spammers</h2>
+        <p>List of sellers caught manipulating product prices.</p>
+        <textarea id="spammerTextarea" rows="5" placeholder="123456789,987654321,111111111"></textarea>
+        <div class="spammer-actions">
+          <button id="spammerSaveBtn">Save</button>
+          <span id="spammerSaveStatus"></span>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <a href="https://github.com/DerStimmler/better-aliexpress" target="_blank">

@@ -28,6 +28,42 @@ async function sendFeatureToggleMessage(featureKey: FeatureKey, active: boolean)
   }
 }
 
+const SPAMMER_STORAGE_KEY = 'priceSpammers';
+
+async function renderSpammerSettings() {
+  const section = document.getElementById('spammerSettings');
+  if (!section) return;
+
+  const textarea = document.getElementById('spammerTextarea') as HTMLTextAreaElement | null;
+  const saveBtn = document.getElementById('spammerSaveBtn');
+  const statusEl = document.getElementById('spammerSaveStatus');
+  if (!textarea || !saveBtn || !statusEl) return;
+
+  const result = await browser.storage.sync.get([SPAMMER_STORAGE_KEY]);
+  const raw = result[SPAMMER_STORAGE_KEY] as string[] | undefined;
+  const list: string[] = raw || [];
+  textarea.value = list.join(',');
+
+  section.hidden = false;
+
+  saveBtn.addEventListener('click', async () => {
+    const raw = textarea.value;
+    const ids = raw
+      .split(/[,\s\n]+/)
+      .map((s) => s.trim())
+      .filter((s) => /^\d+$/.test(s));
+    const clean = [...new Set(ids)];
+
+    await browser.storage.sync.set({ [SPAMMER_STORAGE_KEY]: clean });
+    textarea.value = clean.join(',');
+
+    statusEl.textContent = '✓ Сохранено';
+    setTimeout(() => {
+      statusEl.textContent = '';
+    }, 2000);
+  });
+}
+
 async function renderConfig() {
   const configStore = ConfigStore.getInstance();
   await configStore.load();
@@ -67,3 +103,4 @@ async function renderConfig() {
 }
 
 await renderConfig();
+await renderSpammerSettings();

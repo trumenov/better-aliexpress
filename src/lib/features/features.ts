@@ -9,6 +9,7 @@ import {
   openDetailsPageForBundleProducts
 } from './open-details-page-for-bundle-products.ts';
 import { optimizeNavigation, unoptimizeNavigation } from './optimize-navigation.ts';
+import { activatePriceSpammers, disablePriceSpammers } from './price-spammers.ts';
 
 export const features: Feature[] = [
   {
@@ -53,5 +54,11 @@ export const features: Feature[] = [
     label: 'Open details page for bundle products',
     activate: () => openDetailsPageForBundleProducts(),
     disable: () => openBundlePageForBundleProducts()
+  },
+  {
+    key: 'price-spammers',
+    label: 'Price Spammers',
+    activate: () => activatePriceSpammers(),
+    disable: () => disablePriceSpammers()
   }
 ];
