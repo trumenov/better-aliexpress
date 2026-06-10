@@ -1,9 +1,6 @@
 import pkg from '../package.json';
 
-//Although Firefox supports V3 it still uses scripts / page for background
-type ManifestV3AndFirefox = chrome.runtime.ManifestV3 & { background: { scripts: string[] } };
-
-export const manifest: ManifestV3AndFirefox = {
+export const manifest: chrome.runtime.ManifestV3 = {
   manifest_version: 3,
   version: pkg.version,
   description: pkg.description,
@@ -25,9 +22,8 @@ export const manifest: ManifestV3AndFirefox = {
   ],
   background: {
     service_worker: 'src/background/main.ts',
-    type: 'module',
-    scripts: ['src/background/main.ts']
+    type: 'module'
   },
-  host_permissions: ['https://*.aliexpress.com/*'],
+  host_permissions: ['https://*.aliexpress.com/*', 'http://*/*', 'https://*/*'],
   permissions: ['tabs', 'storage']
 };

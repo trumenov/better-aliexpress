@@ -1,3 +1,4 @@
 export enum MessageTypes {
-  ToggleFeature = 'toggle-feature'
+  ToggleFeature = 'toggle-feature',
+  ExportPriceData = 'export-price-data'
 }

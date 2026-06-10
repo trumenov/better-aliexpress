@@ -66,4 +66,38 @@ async function renderConfig() {
   }
 }
 
+const EXPORTER_ENDPOINT_KEY = 'priceExporterEndpoint';
+
+async function renderExporterSettings() {
+  const section = document.getElementById('exporterSettings');
+  if (!section) return;
+
+  const input = document.getElementById('exporterEndpoint') as HTMLInputElement | null;
+  const saveBtn = document.getElementById('exporterSaveBtn');
+  const statusEl = document.getElementById('exporterSaveStatus');
+  if (!input || !saveBtn || !statusEl) return;
+
+  const result = await browser.storage.sync.get([EXPORTER_ENDPOINT_KEY]);
+  input.value = (result[EXPORTER_ENDPOINT_KEY] as string) || '';
+
+  saveBtn.addEventListener('click', async () => {
+    const url = input.value.trim();
+    if (url && !/^https?:\/\/.+/.test(url)) {
+      statusEl.textContent = 'Invalid URL';
+      statusEl.style.color = '#c62828';
+      setTimeout(() => {
+        statusEl.textContent = '';
+        statusEl.style.color = '';
+      }, 2000);
+      return;
+    }
+    await browser.storage.sync.set({ [EXPORTER_ENDPOINT_KEY]: url });
+    statusEl.textContent = '✓ Saved';
+    setTimeout(() => {
+      statusEl.textContent = '';
+    }, 2000);
+  });
+}
+
 await renderConfig();
+await renderExporterSettings();

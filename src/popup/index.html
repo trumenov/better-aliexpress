@@ -15,6 +15,15 @@
     </header>
     <main class="main">
       <section class="config-container" id="configContainer"></section>
+      <section class="exporter-settings" id="exporterSettings">
+        <h2>Price Exporter</h2>
+        <p>Server endpoint for sending product price data (POST JSON).</p>
+        <input type="url" id="exporterEndpoint" placeholder="https://example.com/api/prices" />
+        <div class="exporter-actions">
+          <button id="exporterSaveBtn">Save</button>
+          <span id="exporterSaveStatus"></span>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <a href="https://github.com/DerStimmler/better-aliexpress" target="_blank">

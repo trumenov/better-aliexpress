@@ -5,4 +5,5 @@ export type FeatureKey =
   | 'hide-fullscreen-popups'
   | 'open-results-in-same-tab'
   | 'open-details-page-for-bundle-products'
-  | 'optimize-navigation';
+  | 'optimize-navigation'
+  | 'product-price-exporter';

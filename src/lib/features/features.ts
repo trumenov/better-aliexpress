@@ -9,6 +9,7 @@ import {
   openDetailsPageForBundleProducts
 } from './open-details-page-for-bundle-products.ts';
 import { optimizeNavigation, unoptimizeNavigation } from './optimize-navigation.ts';
+import { activatePriceExporter, disablePriceExporter } from './product-price-exporter.ts';
 
 export const features: Feature[] = [
   {
@@ -53,5 +54,11 @@ export const features: Feature[] = [
     label: 'Open details page for bundle products',
     activate: () => openDetailsPageForBundleProducts(),
     disable: () => openBundlePageForBundleProducts()
+  },
+  {
+    key: 'product-price-exporter',
+    label: 'Product Price Exporter',
+    activate: () => activatePriceExporter(),
+    disable: () => disablePriceExporter()
   }
 ];
